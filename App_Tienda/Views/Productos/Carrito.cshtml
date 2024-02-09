@@ -1,0 +1,37 @@
+﻿@using System.Text.Json;
+
+@model Dictionary<string, JsonElement>
+
+<h1 class="m-5">Carrito de Compras</h1>
+
+<div class="d-flex flex-wrap flex-row justify-content-between ">
+	@if (Model != null && Model.Count > 0)
+	{
+		@foreach (var elemento in Model)
+		{
+			<div class="d-flex flex-direction-row bg-white mx-5 my-3 p-3" style="width: calc(50% - 20px);">
+				<img src='~/fotos/@elemento.Value.GetProperty("fotourl").GetString()' style="width: 30%;" />
+				<div class="">
+					<ul>
+						<li>Producto: @elemento.Value.GetProperty("nombre").GetString()</li>
+						<li>Marca: @elemento.Value.GetProperty("marca").GetString()</li>
+						<li>Categoria: @elemento.Value.GetProperty("categoria").GetString()</li>
+						<li>Precio: @elemento.Value.GetProperty("precio").GetString()</li>
+						<li>Descripcion: @elemento.Value.GetProperty("descripcion").GetString()</li>
+					</ul>
+					<button type="button" class="btn btn-primary eliminar-btn">
+						Eliminar producto (pendiente)
+					</button>
+				</div>
+			</div>
+		}
+	}
+	else
+	{
+		<p class="mx-5">No hay productos en el carrito.</p>
+	}
+</div>
+
+<button type="button" class="btn btn-lg btn-primary eliminar-btn m-5">
+	Realizar compra (pendiente)
+</button>

@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1 class="m-5">Subir Producto</h1>
+
+<div class="d-flex justify-content-center">
+	<div class="column" style="width: 40%;">
+		<div class="d-flex flex-direction-row justify-content-between align-items-center my-3">
+			<label for="Nombre" class="label-subir-producto">Nombre:</label>
+			<input id="nombre" type="text" class="form-control" name="Nombre">
+		</div>
+		<div class="d-flex flex-direction-row justify-content-between align-items-center my-3">
+			<label for="Marca" class="label-subir-producto">Marca:</label>
+			<input id="marca" type="text" class="form-control" name="Marca">
+		</div>
+		<div class="d-flex flex-direction-row justify-content-between align-items-center my-3">
+			<label for="Categoria" class="label-subir-producto">Categoría:</label>
+			<select id="categoria" class="form-control" name="Categoria">
+				<option value="Seleccionar" selected disabled>Seleccionar</option>
+				<option value="categoria-1">Categoria 1</option>
+				<option value="categoria-2">Categoria 2</option>
+				<option value="categoria-3">Categoria 3</option>
+			</select>
+		</div>
+		<div class="d-flex flex-direction-row justify-content-between align-items-center my-3">
+			<label for="Precio" class="label-subir-producto">Precio:</label>
+			<input id="precio" type="text" class="form-control" name="Precio">
+		</div>
+		<div class="d-flex flex-direction-row justify-content-between align-items-center my-3">
+			<label for="Descripcion" class="label-subir-producto">Descripción:</label>
+			<input id="descripcion" type="text" class="form-control" name="Descripcion">
+		</div>
+		<div class="d-flex flex-direction-row justify-content-between align-items-center my-3">
+			<label for="InputFoto" class="label-subir-producto">Foto:</label>
+			<input id="fotoInput" type="file" class="form-control" name="InputFoto" accept=".png, .jpg, .jpeg">
+			<br>
+			<textarea id="fotoNombreArchivo" rows="4" cols="50" readonly hidden></textarea>
+		</div>
+		<div class="d-flex flex-direction-row justify-content-between align-items-center my-3">
+			<label for="Modelo3d" class="label-subir-producto">Modelo 3D:</label>
+			<input id="modelo3dInput" type="file" class="form-control" name="Modelo3d" accept=".json">
+			<br>
+			<textarea id="modelo3dContent" rows="4" cols="50" readonly hidden></textarea>
+		</div>
+		<div class="my-5">
+			<button id="guardarProducto" class="btn btn-info btn-lg" value="Enviar" onclick="GuardarProducto(event)">Guardar producto</button>
+		</div>
+	</div>
+</div>
+
+@section scripts {
+
+	<script src="~/js/subirProducto.js"></script>
+
+		}

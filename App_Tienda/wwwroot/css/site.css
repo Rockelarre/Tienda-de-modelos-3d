@@ -1,0 +1,68 @@
+html {
+  font-size: 14px;
+}
+
+main {
+    padding-top: 3px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgba(220, 20, 60, 0.8);
+    border-radius: 2rem;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.cursor-3d {
+    cursor: crosshair;
+}
+
+.visible{
+    display: flex;
+}
+
+.oculto {
+    display: none;
+}
+
+.boton-imagen {
+    all: initial;
+    cursor: pointer;
+}
+
+.boton-imagen * {
+    cursor: pointer;
+}
+
+.label-subir-producto {
+    width: 40%;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-size: 1.5rem;
+}
+
+.nav-link:hover {
+    color: cyan !important;
+}
+
+@media (min-width: 768px) {
+    html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}

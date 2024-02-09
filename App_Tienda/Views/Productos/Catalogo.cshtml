@@ -1,0 +1,269 @@
+﻿@model List<Producto>
+@{
+	ViewData["Title"] = "Catálogo";
+}
+
+<h1 class="m-5">@ViewData["Title"]</h1>
+
+<div class="container-fluid d-flex flex-direction-row justify-content-center align-items-center my-5">
+	<h3 style="width: 20%;">Categorías: </h3>
+	<div style="width: 60%;">
+		<ul class="row list-unstyled d-flex justify-content-around">
+			<li class="col-auto"><button class="btn btn-lg btn-info" onclick="categoriaTodas(event)">Todas</button></li>
+			<li class="col-auto"><button class="btn btn-lg btn-info" onclick="categoria1(event)">Categoria 1</button></li>
+			<li class="col-auto"><button class="btn btn-lg btn-info" onclick="categoria2(event)">Categoria 2</button></li>
+			<li class="col-auto"><button class="btn btn-lg btn-info" onclick="categoria3(event)">Categoria 3</button></li>
+		</ul>
+	</div>
+</div>
+
+<div class="container-fluid pt-3">
+
+	@if (Model != null && Model.Any())
+	{
+		<div class="row">
+
+			<div class="col-sm-4">
+				<div class="card mb-4 categoria-1">
+					<img src="~/fotos/helicoptero.png" class="card-img-top boton-imagen" alt="foto del producto">
+					<div class="card-body d-flex flex-direction-row justify-content-around align-items-center">
+						<h5 class="card-title">Helicóptero</h5>
+						<h5 class="card-text">Precio: $99000</h5>
+						<button type="button" class="btn btn-primary detalles-btn" data-bs-toggle="modal" data-bs-target="#modalHelicoptero">
+							Detalles
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal -->
+			<div id="modalHelicoptero" class="modal fade" tabindex="-1" aria-labelledby="modalHelicoptero" aria-hidden="true">
+				<div class="modal-dialog modal-fullscreen">
+					<div class="modal-content">
+						<div class="modal-header d-flex flex-row" style="height: 80%; background: LightSkyBlue;">
+							<div class="modal-body p-0" style="width: 60%">
+								<div id="iframeContainer"></div>
+								<h1 class="mx-5" style="color: black; position: relative; top: -60px;">Este es un modelo 3d y rótelo para verlo en detalle!</h1>
+							</div>
+							<div class="d-flex justify-content-center align-items-center" style="width: 40%">
+								<div>
+									<h1>Nombre: <span class="modal-nombre">Helicóptero</span></h1>
+									<h1>Marca: <span class="modal-marca">Cianware</span></h1>
+									<h1>Categoría: <span class="modal-categoria">categoria-1</span></h1>
+									<h1>Precio: <span class="modal-precio">$990000</span></h1>
+									<h1>Descripción: <span class="modal-descripcion">Este es un helicóptero</span></h1>
+									<h1 hidden>Foto URL: <span class="modal-foto-url"></span></h1>
+									<h1 class="d-none">Modelo 3D: <span class="modelo-3d"></span></h1>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer d-flex justify-content-center" style="height: 20%">
+							<button type="button" class="btn btn-info btn-lg mx-5 btn-agregar-carrito">Agregar al carrito de compras</button>
+							<button type="button" class="btn btn-danger btn-lg  mx-5" data-bs-dismiss="modal" onclick="BorrarIframes(event)">Cerrar ventana</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			@foreach (var producto in Model)
+			{
+				<div class="col-sm-4 @producto.Categoria">
+					<div class="card mb-4">
+						<img src="~/fotos/@producto.FotoUrl" class="card-img-top boton-imagen" alt="foto del producto">
+						<div class="card-body d-flex flex-direction-row justify-content-around align-items-center">
+							<h5 class="card-title">@producto.Nombre</h5>
+							<h5 class="card-text">Precio: $@producto.Precio</h5>
+							@{
+								var target = producto.Nombre.Replace(" ", "");
+							}
+							<button type="button" class="btn btn-primary detalles-btn" data-bs-toggle="modal" data-bs-target=".@target">
+								Detalles
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal -->
+				<div class="modal fade @target" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-fullscreen">
+						<div class="modal-content">
+							<div class="modal-header d-flex flex-row" style="height: 80%; background: LightSkyBlue;">
+								<div class="modal-body p-0 container-canvas" style="width: 60%">
+									<canvas id="canvasH" class="canvas cursor-3d" style="width:100%;height:100%; border-radius: 2rem;"></canvas>
+									<h1 class="mx-5" style="color: black; position: relative; top: -60px;">Este es un modelo 3d y rótelo para verlo en detalle!</h1>
+								</div>
+								<div class="d-flex justify-content-center align-items-center" style="width: 40%">
+									<div>
+										<h1>Nombre: <span class="modal-nombre">@producto.Nombre</span></h1>
+										<h1>Marca: <span class="modal-marca">@producto.Marca</span></h1>
+										<h1>Categoría: <span class="modal-categoria">@producto.Categoria</span></h1>
+										<h1>Precio: $<span class="modal-precio">@producto.Precio</span></h1>
+										<h1>Descripción: <span class="modal-descripcion">@producto.Descripcion</span></h1>
+										<h1 hidden>Foto URL: <span class="modal-foto-url">@producto.FotoUrl</span></h1>
+										<h1 class="d-none">Modelo 3D: <span class="modelo-3d">@producto.Modelo3d</span></h1>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer d-flex justify-content-center" style="height: 20%">
+								<button type="button" class="btn btn-info btn-lg mx-5 btn-agregar-carrito">Agregar al carrito de compras</button>
+								<button type="button" class="btn btn-danger btn-lg  mx-5" data-bs-dismiss="modal">Cerrar ventana</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	}
+	else
+	{
+		<p>No hay productos disponibles.</p>
+	}
+</div>
+
+@section scripts {
+
+	<script src="~/js/catalogo.js"></script>
+
+	<script type="module">
+
+		import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r127/build/three.module.js';
+
+		const modals = Array.from(document.getElementsByClassName('modal'));
+
+		modals.forEach(modal => {
+			window.addEventListener('DOMContentLoaded', () => {
+
+				let data3d;
+
+				modal.addEventListener('shown.bs.modal', () => {
+
+					const scene = new THREE.Scene();
+
+					const canvas = modal.querySelector('.canvas');
+
+					const container = modal.querySelector('.container-canvas')
+					const containerWidth = container.clientWidth;
+					const containerHeight = container.clientHeight;
+
+					const camera = new THREE.PerspectiveCamera(25, containerWidth / containerHeight, 0.1, 1000);
+
+					const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+					renderer.setSize(containerWidth, containerHeight);
+					renderer.shadowMap.enabled = true;
+
+					var data3d = modal.querySelector('.modelo-3d').textContent;
+
+					//console.log(data3d)
+
+					var json3d = {};
+
+					if (data3d == '') {
+						return 0;
+					}
+					else {
+						json3d = JSON.parse(data3d);
+					}
+
+					const geometry = eval(`new ${json3d.geometria}`);
+					const material = eval(`new ${json3d.material}`);
+					const mesh = new THREE.Mesh(geometry, material);
+
+					const skyColor = 0xB1E1FF;  // light blue
+					const groundColor = 0xB97A20;  // brownish orange
+					const intensity_1 = 0.75;
+					const light_1 = new THREE.HemisphereLight(skyColor, groundColor, intensity_1);
+					scene.add(light_1);
+
+					const color = 0xFFFFFF;
+					const intensity_2 = 1;
+					const light_2 = new THREE.DirectionalLight(color, intensity_2);
+					light_2.position.set(5, 10, 2);
+					light_2.target = mesh; // Establecer el objetivo como el mesh
+					scene.add(light_2);
+
+					scene.add(mesh);
+					scene.background = new THREE.Color('gray');
+
+					camera.position.z = 5;
+
+					let animationId;
+
+					function animate() {
+
+						animationId = requestAnimationFrame(animate);
+
+						renderer.render(scene, camera);
+					}
+
+					animate();
+
+					let isDragging = false;
+					let previousMousePosition = {
+						x: 0,
+						y: 0
+					};
+
+					function onMouseMove(event) {
+						const deltaMove = {
+							x: event.offsetX - previousMousePosition.x,
+							y: event.offsetY - previousMousePosition.y
+						};
+
+						if (isDragging) {
+							const deltaRotationQuaternion = new THREE.Quaternion()
+								.setFromEuler(new THREE.Euler(
+									toRadians(deltaMove.y * 1),
+									toRadians(deltaMove.x * 1),
+									0,
+									'XYZ'
+								));
+
+							mesh.quaternion.multiplyQuaternions(deltaRotationQuaternion, mesh.quaternion);
+						}
+
+						previousMousePosition = {
+							x: event.offsetX,
+							y: event.offsetY
+						};
+					}
+
+					function onMouseDown(event) {
+						isDragging = true;
+						previousMousePosition = {
+							x: event.offsetX,
+							y: event.offsetY
+						};
+					}
+
+					function onMouseUp() {
+						isDragging = false;
+					}
+
+					canvas.addEventListener('mousemove', onMouseMove);
+					canvas.addEventListener('mousedown', onMouseDown);
+					canvas.addEventListener('mouseup', onMouseUp);
+
+					function toRadians(angle) {
+						return angle * (Math.PI / 180);
+					}
+
+					// Función para detener la animación
+					function stopAnimation() {
+						cancelAnimationFrame(animationId);
+					}
+
+					modal.addEventListener('hidden.bs.modal', () => {
+
+						// Limpiar la escena Three.js
+						while (scene.children.length > 0) {
+							scene.remove(scene.children[0]);
+						}
+
+						stopAnimation();
+					});
+				});
+			});
+		});
+
+	</script>
+}

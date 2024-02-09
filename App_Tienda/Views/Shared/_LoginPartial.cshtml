@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using App_Tienda.Entities
+
+@inject SignInManager<Usuario> SignInManager
+@inject UserManager<Usuario> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Usuario Logueado: @UserManager.GetUserName(User)</a>
+        </li>
+        <li class="nav-item">
+            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0" onclick="">Logout (pendiente)</button>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="register" asp-area="" asp-controller="Login" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="login" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+        </li>
+    }
+</ul>
