@@ -2,15 +2,15 @@
 $(document).ready(function () {
     $('#fotoInput').change(function () {
 
-        var nombreArchivo = $(this).val().split('\\').pop(); // Obtenemos solo el nombre del archivo
-        $('#fotoNombreArchivo').val(nombreArchivo); // Establecemos el nombre del archivo en el elemento con id modelo3dContent
+        var nombreArchivo = $(this).val().split('\\').pop();
+        $('#fotoNombreArchivo').val(nombreArchivo);
 
     });
 });
 
 $(document).ready(function () {
     $('#modelo3dInput').change(function () {
-        var archivo = $(this)[0].files[0]; // Obtener el archivo seleccionado
+        var archivo = $(this)[0].files[0]; 
         var lector = new FileReader();
 
         lector.onload = function (evento) {
@@ -27,7 +27,6 @@ function GuardarProducto(event) {
 
     event.preventDefault();
 
-    // Obtener los valores de los campos de entrada
     var nombre = $('#nombre').val();
     var marca = $('#marca').val();
     var categoria = $('#categoria').val();
@@ -50,7 +49,6 @@ function GuardarProducto(event) {
             modelo3d: modelo3d
         };
 
-        // Realizar la solicitud POST con AJAX
         $.ajax({
             type: 'POST',
             url: 'https://localhost:7147/api/Productos',
@@ -58,15 +56,14 @@ function GuardarProducto(event) {
             data: JSON.stringify(datos),
             success: function (response) {
                 console.log('Producto guardado exitosamente:', response);
-                // Manejar la respuesta del servidor según sea necesario
                 
-                var formData = new FormData(); // Crear un objeto FormData para enviar el archivo
-                var archivo = $('#fotoInput')[0].files[0]; // Obtener el archivo seleccionado
+                var formData = new FormData(); 
+                var archivo = $('#fotoInput')[0].files[0];
 
-                formData.append('archivo', archivo); // Agregar el archivo al FormData
+                formData.append('archivo', archivo);
 
                 $.ajax({
-                    url: '/Productos/SubirArchivo', // Ruta en el servidor para manejar la solicitud y guardar el archivo
+                    url: '/Productos/SubirArchivo',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -90,7 +87,6 @@ function GuardarProducto(event) {
             },
             error: function (xhr, status, error) {
                 console.error('Error al guardar el producto:', error);
-                // Manejar el error de la solicitud según sea necesario
                 alert('Error al guardar el producto.');
             }
         });

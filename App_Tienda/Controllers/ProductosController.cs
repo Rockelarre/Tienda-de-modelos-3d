@@ -82,7 +82,6 @@ namespace App_Tienda.Controllers
 			try
 			{
 				_productoService.AgregarProducto(jsonElement);
-				// Devolver el diccionario de productos agregados como parte de la respuesta
 
 				foreach (var item in _productoService.ProductosAgregados)
 				{
@@ -125,19 +124,15 @@ namespace App_Tienda.Controllers
 		{
 			try
 			{
-				// Obtener el token del encabezado de la solicitud
 				string jwToken = HttpContext.Request.Headers["Authorization"];
 
-				// Verificar si el token está presente en el encabezado de la solicitud
 				if (string.IsNullOrEmpty(jwToken))
 				{
 					return BadRequest("El token no se proporcionó en el encabezado de la solicitud");
 				}
 
-				// Obtener la clave secreta del token
 				string secretKey = jwToken.Substring(jwToken.Length - 44);
 
-				// Configurar los parámetros de validación del token
 				var tokenValidationParameters = new TokenValidationParameters
 				{
 					TokenDecryptionKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey)),
@@ -147,16 +142,13 @@ namespace App_Tienda.Controllers
 					ClockSkew = TimeSpan.Zero
 				};
 
-				// Decodificar el token
 				var jwtHandler = new JwtSecurityTokenHandler();
 				var jsonToken = jwtHandler.ReadToken(jwToken) as JwtSecurityToken;
 
-				// Devolver el token decodificado
 				return Ok(jsonToken);
 			}
 			catch (Exception ex)
 			{
-				// Manejar cualquier excepción que ocurra durante el proceso de decodificación del token
 				return BadRequest("Error al decodificar el token: " + ex.Message);
 			}
 		}

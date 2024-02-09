@@ -129,7 +129,7 @@ function AgregarCarrito(event, nombre, marca, categoria, precio, descripcion, fo
         },
         error: function (xhr, status, error) {
             console.error('Error al guardar el producto:', error);
-            // Manejar el error de la solicitud según sea necesario
+
             alert('Error al guardar el producto.');
         }
 
@@ -139,7 +139,6 @@ function AgregarCarrito(event, nombre, marca, categoria, precio, descripcion, fo
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("modalHelicoptero").addEventListener("shown.bs.modal", function () {
         
-        // Crear y agregar un nuevo iframe
         var iframe = document.createElement("iframe");
         iframe.src = "http://localhost:3000/";
         iframe.classList.add("cursor-3d");
