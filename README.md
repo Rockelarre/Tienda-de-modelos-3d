@@ -20,3 +20,6 @@ Email: 'user@cianware.com', contraseña: 'Pa$$w0rd'.
 
         
 Para subir productos se debe ingresar los datos, y cargar los archivos que están en la carpeta ArchivosParaPruebas en la raíz de la solución. Hay archivos para fotos y modelos 3d.
+
+
+La base de datos está creada con Sqlite.
