@@ -1,4 +1,4 @@
-# Tienda-de-modelos-3d
+# Tienda-de-modelos-3d ---> Hecha con THREE.js
 
 INSTRUCCIONES
 
